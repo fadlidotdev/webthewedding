@@ -2,8 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   body {
     @apply text-primary-foreground/65;
+  }
+  
+  input, textarea {
+    @apply text-primary-foreground;
   }
 }
