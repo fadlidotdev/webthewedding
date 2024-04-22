@@ -40,8 +40,8 @@
         </span>
 
         <p class="text-sm opacity-75 pt-7">
-          tepatnya di tanggal 14 Januari 2024 kami akan melangsungkan pernikahan yang sudah lama
-          kami nantikan ikatan suci dalam pernikahan
+          Tepatnya di tanggal 14 Januari 2024 telah dilaksanakan pernikahan yang sudah lama kami
+          nantikan ikatan suci dalam pernikahan.
         </p>
       </li>
     </ol>
