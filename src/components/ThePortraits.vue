@@ -26,20 +26,20 @@ function open(index) {
     <VueEasyLightbox :visible="visibleRef" :imgs="imgsRef" :index="indexRef" @hide="hide"></VueEasyLightbox>
 
 
-    <section id="portraits" class="relative px-5 py-16 space-y-6 overflow-hidden">
+    <section id="portraits" class="relative py-16 space-y-6 overflow-hidden">
         <div class="space-y-1 text-center">
             <h2 class="text-4xl">Portraits of Us</h2>
         </div>
 
         <div class="flex flex-col w-3/4 gap-2 mx-auto">
             <img class="cursor-pointer aspect-[3/4] object-cover" src="/1.webp" @click="open(0)" />
-            <div class="grid grid-cols-3 gap-2">
+            <div class="grid grid-cols-3 gap-2 overflow-hidden h-28">
                 <img class="object-cover h-full cursor-pointer" src="/3.webp" @click="open(1)" />
                 <div class="col-span-2">
                     <img class="object-cover h-full cursor-pointer aspect-video" src="/2.webp" @click="open(2)" />
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-2">
+            <div class="grid h-32 grid-cols-2 gap-2">
                 <img class="object-cover cursor-pointer aspect-square" src="/4.webp" @click="open(3)" />
                 <img class="object-cover cursor-pointer aspect-square" src="/5.webp" @click="open(4)" />
             </div>

@@ -8,7 +8,7 @@ html {
 
 @layer base {
   body {
-    @apply text-primary-foreground/65;
+    @apply bg-light text-primary-foreground/65;
   }
   
   input, textarea {

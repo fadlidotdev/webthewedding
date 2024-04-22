@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
+
 const targetDate = new Date('2024-04-27'); // Set your target date here
 targetDate.setHours(10)
 const days = ref(0);
@@ -25,6 +26,7 @@ function updateTime() {
     seconds.value = Math.floor((diff % (1000 * 60)) / 1000);
 }
 
+
 onMounted(() => {
     updateTime();
     interval = setInterval(updateTime, 1000);
@@ -38,7 +40,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-
     <section class="section-hero-2 gap-8 min-h-[100vh] flex flex-col items-center justify-center text-center">
         <h1 class="text-primary font-display text-7xl" style="text-shadow: rgba(0, 0, 0, 0.1) 2px 2px 0px">
             Nanda &amp;<br />

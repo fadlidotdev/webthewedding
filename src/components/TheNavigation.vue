@@ -1,9 +1,8 @@
 <script setup></script>
 
 <template>
-  <nav class="fixed z-50 bottom-4 left-4 right-4">
-    <ul
-      class="grid grid-cols-4 p-1 bg-white border-2 rounded-lg opacity-75 border-primary/50 text-primary place-items-center">
+  <nav class="fixed bottom-0 left-0 right-0 z-50">
+    <ul class="grid grid-cols-4 p-1 bg-white border-2 opacity-75 border-primary/50 text-primary place-items-center">
       <li>
         <a class="flex flex-col items-center justify-center" href="#mempelai">
           <span class="text-lg material-symbols-outlined"> favorite </span>

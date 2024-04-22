@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+
 import TheIntro from './components/TheIntro.vue'
 import TheNavigation from './components/TheNavigation.vue'
 import TheRSVP from './components/TheRSVP.vue'
@@ -7,8 +8,12 @@ import TheCouple from './components/TheCouple.vue';
 import TheEvents from './components/TheEvents.vue';
 import ThePortraits from './components/ThePortraits.vue';
 import TheWelcoming from './components/TheWelcoming.vue';
+import TheStory from './components/TheStory.vue';
+import TheFin from './components/TheFin.vue';
+import TheCopyright from './components/TheCopyright.vue';
 
 const opened = ref(false)
+
 </script>
 
 <template>
@@ -26,6 +31,12 @@ const opened = ref(false)
     <TheRSVP />
 
     <ThePortraits />
+
+    <TheStory />
+
+    <TheFin />
+
+    <TheCopyright />
   </main>
 </template>
 
@@ -46,6 +57,14 @@ const opened = ref(false)
       rgba(209, 217, 223, 0.7)),
     url(/hero-2.webp);
   padding: 4.8rem 0px 9.6rem;
+  background-size: cover;
+  background-position: center;
+}
+
+.section-fin {
+  background-image: linear-gradient(to right bottom,
+      rgba(70, 37, 35, .9), rgba(151, 96, 63, .7)),
+    url(/hero-2.webp);
   background-size: cover;
   background-position: center;
 }

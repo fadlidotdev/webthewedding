@@ -1,5 +1,5 @@
 <template>
-  <section class="section-hero h-[100vh] relative flex flex-col items-center justify-center">
+  <section class="section-hero h-[100dvh] relative flex flex-col items-center justify-center">
     <div class="flex flex-col items-center gap-6 text-center">
       <h1 class="text-6xl text-primary font-display" style="text-shadow: rgba(0, 0, 0, 0.1) 2px 2px 0px">
         Nanda &amp; Egi
