@@ -1,14 +1,53 @@
 <script setup>
+import { supabase } from '@/lib/supabase';
 import { Toaster, toast } from '@steveyuowo/vue-hot-toast'
 import '@steveyuowo/vue-hot-toast/vue-hot-toast.css'
+import { onMounted, ref } from 'vue';
+
+const rsvps = ref([])
+
+const name = ref()
+const message = ref()
+const attendance = ref()
 
 async function copy(accountNumber) {
     try {
         await navigator.clipboard.writeText(accountNumber)
-        toast.success('Berhasil disalin!')
+        toast.success('Berhasil disalin')
     } catch (err) {
         toast.error('Gagal menyalin teks.')
     }
+}
+
+async function fetchData() {
+    const { data } = await supabase.from('rsvp').select().eq('slug', 'wedding-0').order('id', { ascending: false })
+    rsvps.value = data
+}
+
+onMounted(() => {
+    fetchData()
+
+    const urlParams = new URLSearchParams(window.location.search);
+    name.value = urlParams.get('name') ?? 'Guest'
+})
+
+async function submit() {
+    const { error } = await supabase.from('rsvp').insert({
+        name: name.value,
+        message: message.value,
+        attendance: Number(attendance.value),
+        slug: import.meta.env.VITE_SLUG_ID
+    })
+
+    if (!error) {
+        toast.success('Berhasil dikirim')
+        message.value = ''
+        attendance.value = undefined
+
+        fetchData()
+    }
+
+
 }
 </script>
 
@@ -30,17 +69,19 @@ async function copy(accountNumber) {
             <p class="text-sm opacity-75">Your wish are very mean to us.</p>
         </div>
 
-        <form class="flex flex-col w-3/4 gap-2 p-4 my-4 rounded-lg bg-primary-foreground/50">
-            <input placeholder="Masukkan nama" class="rounded" />
+        <form class="flex flex-col w-3/4 gap-2 p-4 my-4 rounded-lg bg-primary-foreground/50" @submit.prevent="submit">
+            <input placeholder="Masukkan nama" class="rounded" required v-model="name" />
 
             <label class="flex items-center gap-2" htmlFor="hadir">
-                <input type="radio" name="kehadiran" id="hadir" value="1" /> <span>Hadir</span>
+                <input type="radio" required name="kehadiran" id="hadir" value="1" v-model="attendance" />
+                <span>Hadir</span>
             </label>
             <label class="flex items-center gap-2" htmlFor="belum_hadir">
-                <input type="radio" name="kehadiran" id="belum_hadir" value="0" /> <span>Belum Hadir</span>
+                <input type="radio" name="kehadiran" id="belum_hadir" value="0" v-model="attendance" /> <span>Belum
+                    Hadir</span>
             </label>
 
-            <textarea class="rounded" placeholder="Masukkan pesan"></textarea>
+            <textarea required class="rounded" placeholder="Masukkan pesan" v-model="message"></textarea>
 
             <button class="h-10 px-4 mt-3 text-sm text-white border rounded-lg shadow-xl bg-primary border-primary">
                 Kirim
@@ -48,53 +89,16 @@ async function copy(accountNumber) {
         </form>
 
         <div class="flex flex-col w-3/4 gap-2 mb-16 overflow-auto max-h-80">
-            <div class="p-3 text-white rounded-lg bg-primary-foreground/50">
+
+            <div v-for="rsvp in rsvps" :key="rsvp.id" class="p-3 text-white rounded-lg bg-primary-foreground/50">
                 <div class="flex items-center gap-2 mb-2">
-                    <h4 class="text-sm font-medium">Nova dan Fadli</h4>
+                    <h4 class="text-sm font-medium">{{ rsvp.name }}</h4>
 
-                    <div class="block px-2 py-1 text-xs rounded-full bg-primary">Hadir</div>
-                </div>
-                <p class="text-xs text-white/75">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, qui!
-                </p>
-            </div>
-
-            <div class="p-3 text-white rounded-lg bg-primary-foreground/50">
-                <div class="flex items-center gap-2 mb-2">
-                    <h4 class="text-sm font-medium">Nova dan Fadli</h4>
-
-                    <div class="block px-2 py-1 text-xs rounded-full bg-primary-foreground">Belum hadir</div>
-                </div>
-                <p class="text-xs text-white/75">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, qui!
-                </p>
-            </div>
-
-            <div class="p-3 text-white rounded-lg bg-primary-foreground/50">
-                <div class="flex items-center gap-2 mb-2">
-                    <h4 class="text-sm font-medium">Nova dan Fadli</h4>
-
-                    <div class="block px-2 py-1 text-xs rounded-full bg-primary-foreground">Belum hadir</div>
-                </div>
-                <p class="text-xs text-white/75">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, qui!
-                </p>
-            </div>
-            <div class="p-3 text-white rounded-lg bg-primary-foreground/50">
-                <div class="flex items-center gap-2 mb-2">
-                    <h4 class="text-sm font-medium">Nova dan Fadli</h4>
-
-                    <div class="block px-2 py-1 text-xs rounded-full bg-primary-foreground">Belum hadir</div>
-                </div>
-                <p class="text-xs text-white/75">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, qui!
-                </p>
-            </div>
-            <div class="p-3 text-white rounded-lg bg-primary-foreground/50">
-                <div class="flex items-center gap-2 mb-2">
-                    <h4 class="text-sm font-medium">Nova dan Fadli</h4>
-
-                    <div class="block px-2 py-1 text-xs rounded-full bg-primary-foreground">Belum hadir</div>
+                    <div :class="[
+                        'block px-2 py-1 text-xs rounded-full', rsvp.attendance ? 'bg-primary' : 'bg-primary-foreground'
+                    ]">{{
+                        rsvp.attendance ? 'Hadir' : 'Belum hadir'
+                    }}</div>
                 </div>
                 <p class="text-xs text-white/75">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, qui!

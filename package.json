@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@steveyuowo/vue-hot-toast": "^1.2.5",
+    "@supabase/supabase-js": "^2.42.5",
     "vue": "^3.4.21",
     "vue-easy-lightbox": "^1.19.0"
   },

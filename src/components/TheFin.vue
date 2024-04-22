@@ -1,6 +1,6 @@
 <template>
     <footer
-        class="relative flex flex-col items-center justify-center gap-6 px-5 py-8 overflow-hidden section-fin text-light bg-primary-foreground">
+        class="relative flex flex-col items-center justify-center gap-6 px-5 py-8 pb-12 overflow-hidden section-fin text-light bg-primary-foreground">
         <p class="text-sm text-center opacity-75">
             Atas kehadiran doa dan restu dari Bapak/Ibu/saudara/i sekalian kami ucapkan termakasih.
         </p>
@@ -11,5 +11,8 @@
         </h1>
 
         <p class="text-sm opacity-75">Sabtu, 27 April 2024</p>
+
+        <img src="/ornaments/ornament-white-flower.png" class="w-16 -scale-x-[1] rotate-[120deg] -bottom-10 absolute"
+            alt="">
     </footer>
 </template>
